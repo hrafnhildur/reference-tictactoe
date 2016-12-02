@@ -1,0 +1,47 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_inject = require('./common/framework/inject'); /* istanbul ignore next */var _inject2 = _interopRequireDefault(_inject);
+
+var /* istanbul ignore next */_uuid = require('common/framework/uuid'); /* istanbul ignore next */var _uuid2 = _interopRequireDefault(_uuid);
+
+var /* istanbul ignore next */_App = require('App'); /* istanbul ignore next */var _App2 = _interopRequireDefault(_App);
+var /* istanbul ignore next */_ConnectedClients = require('status/ConnectedClients'); /* istanbul ignore next */var _ConnectedClients2 = _interopRequireDefault(_ConnectedClients);
+var /* istanbul ignore next */_ConnectedUsers = require('status/ConnectedUsers'); /* istanbul ignore next */var _ConnectedUsers2 = _interopRequireDefault(_ConnectedUsers);
+var /* istanbul ignore next */_Chat = require('chat/Chat'); /* istanbul ignore next */var _Chat2 = _interopRequireDefault(_Chat);
+var /* istanbul ignore next */_routingContext = require('./routing-context'); /* istanbul ignore next */var _routingContext2 = _interopRequireDefault(_routingContext);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function appContext(injected) {
+    var io = injected('io');
+    var env = injected('env'); /* istanbul ignore next */var _RoutingContext =
+
+    /* istanbul ignore next */(0, _routingContext2.default)( /* istanbul ignore next */(0, _inject2.default)({ io, env })); /* istanbul ignore next */var eventRouter = _RoutingContext.eventRouter; /* istanbul ignore next */var commandRouter = _RoutingContext.commandRouter; /* istanbul ignore next */var queryRouter = _RoutingContext.queryRouter; /* istanbul ignore next */var socket = _RoutingContext.socket;
+
+    var ConnectedClients = /* istanbul ignore next */(0, _ConnectedClients2.default)( /* istanbul ignore next */(0, _inject2.default)({
+        socket }));
+
+    var ConnectedUsers = /* istanbul ignore next */(0, _ConnectedUsers2.default)( /* istanbul ignore next */(0, _inject2.default)({
+        socket }));
+
+    var Chat = /* istanbul ignore next */(0, _Chat2.default)( /* istanbul ignore next */(0, _inject2.default)({
+        commandPort: commandRouter,
+        eventRouter,
+        queryRouter,
+        generateUUID: /* istanbul ignore next */_uuid2.default }));
+
+
+    var App = /* istanbul ignore next */(0, _App2.default)( /* istanbul ignore next */(0, _inject2.default)({
+        io,
+        ConnectedClients,
+        ConnectedUsers,
+        Chat,
+        socket,
+        eventRouter }));
+
+
+    var exports = {
+        App };
+
+
+    return exports;
+
+} /* istanbul ignore next */exports.default =
+
+appContext;

@@ -1,0 +1,18 @@
+/* istanbul ignore next */'use strict';module.exports = function (injected) {
+    var socketIo = injected('io');
+    var messageRouter = injected('messageRouter');
+    return {
+        dispatchThroughIo(routingKey, socketVerb, conditionFn) {
+            socketVerb = socketVerb || 'eventIssued';
+            conditionFn = conditionFn || function () {
+                return true;
+            };
+            messageRouter.on(routingKey, function (messageObj) {
+                if (conditionFn(messageObj)) {
+                    console.debug("Dispatching message over socket.io: " + socketVerb + " message: ", messageObj);
+                    socketIo.emit(socketVerb, messageObj);
+                }
+            });
+        } };
+
+};

@@ -1,0 +1,33 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = 'src/status/ConnectedClients.js';var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();exports.default =
+
+function (injected) {
+    var socket = injected('socket'); /* istanbul ignore next */var
+
+    ConnectedClients = function (_React$Component) {_inherits(ConnectedClients, _React$Component);
+        function /* istanbul ignore next */ConnectedClients() {/* istanbul ignore next */_classCallCheck(this, ConnectedClients);var _this = _possibleConstructorReturn(this, (ConnectedClients.__proto__ || Object.getPrototypeOf(ConnectedClients)).call(this));
+
+            /* istanbul ignore next */_this.state = {
+                stats: {} }; /* istanbul ignore next */return _this;
+
+
+
+        }_createClass(ConnectedClients, [{ key: 'componentWillMount', value: function componentWillMount()
+            {/* istanbul ignore next */var _this2 = this;
+                socket.on('stats', function (data) {
+                    /* istanbul ignore next */_this2.setState({
+                        stats: data });
+
+                });
+
+            } }, { key: 'render', value: function render()
+            {
+                return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'ConnectedClients', __source: { fileName: _jsxFileName, lineNumber: 24 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ className: 'App-intro', __source: { fileName: _jsxFileName, lineNumber: 25 }, __self: this },
+                            this.state.stats.numClients, /* istanbul ignore next */' connected clients')));
+
+
+            } }]);return ConnectedClients;}( /* istanbul ignore next */_react2.default.Component);
+
+    return ConnectedClients;
+
+};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}

@@ -1,0 +1,35 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/home/hrafnhildur/reference-tictactoe/client/src/App.js';var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();exports.default =
+
+
+
+
+
+function (injected) {
+    var ConnectedClients = injected("ConnectedClients");
+    var ConnectedUsers = injected("ConnectedUsers");
+    var Chat = injected("Chat"); /* istanbul ignore next */var
+
+    App = function (_React$Component) {_inherits(App, _React$Component);function App() {_classCallCheck(this, App);return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));}_createClass(App, [{ key: 'render', value: function render()
+            {
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'App', __source: { fileName: _jsxFileName, lineNumber: 15 }, __self: this },
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'App-header', __source: { fileName: _jsxFileName, lineNumber: 16 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'img', /* istanbul ignore next */{ src: /* istanbul ignore next */_logo2.default, className: 'App-logo', alt: 'logo', __source: { fileName: _jsxFileName, lineNumber: 17 }, __self: this }),
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h2', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: this }, /* istanbul ignore next */'Welcome to HGOP 2016 base app')),
+
+
+                        /* istanbul ignore next */_react2.default.createElement(ConnectedClients, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 21 }, __self: this }),
+
+                        /* istanbul ignore next */_react2.default.createElement(Chat, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: this }),
+
+                        /* istanbul ignore next */_react2.default.createElement(ConnectedUsers, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 25 }, __self: this }),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'App-footer', __source: { fileName: _jsxFileName, lineNumber: 27 }, __self: this },
+                            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'small', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 28 }, __self: this }, /* istanbul ignore next */'You are running this application in ', /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'b', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 28 }, __self: this }, process.env.NODE_ENV), /* istanbul ignore next */' mode.'))));
+
+
+
+            } }]);return App;}( /* istanbul ignore next */_react2.default.Component);
+
+    return App;
+};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_lodash = require('lodash'); /* istanbul ignore next */var _lodash2 = _interopRequireDefault(_lodash);var /* istanbul ignore next */_logo = require('./logo.svg'); /* istanbul ignore next */var _logo2 = _interopRequireDefault(_logo); /* istanbul ignore next */require('./App.css'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;};

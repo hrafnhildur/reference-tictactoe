@@ -1,0 +1,25 @@
+/* istanbul ignore next */'use strict';module.exports = function (injected) {
+    var socketIoVerb = injected('socketIoVerb');
+    var messageRouter = injected('messageRouter');
+
+    return {
+        startDispatching: function /* istanbul ignore next */startDispatching(_socket, _session) {
+            var socket = _socket;
+            var session = _session;
+
+            var listener;
+            listener = function /* istanbul ignore next */listener(message) {
+                message._session = session;
+                console.debug("Incoming message from socket.io: " + socketIoVerb + " message: ", message);
+                messageRouter.routeMessage(message);
+            };
+
+            socket.on(socketIoVerb, listener);
+            return {
+                stopDispatching: function /* istanbul ignore next */stopDispatching() {
+                    socket.removeListener(socketIoVerb, listener);
+                } };
+
+        } };
+
+};

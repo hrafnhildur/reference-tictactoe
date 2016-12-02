@@ -1,0 +1,78 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = 'src/chat/Chat.js';var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();exports.default =
+
+
+function (injected) {
+
+    var commandPort = injected('commandPort');
+    var eventRouter = injected('eventRouter');
+    var queryRouter = injected('queryRouter');
+
+    var generateUUID = injected('generateUUID'); /* istanbul ignore next */var
+
+    Chat = function (_React$Component) {_inherits(Chat, _React$Component);
+        function /* istanbul ignore next */Chat() {/* istanbul ignore next */_classCallCheck(this, Chat);var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this));
+
+
+            /* istanbul ignore next */_this.state = {
+                messageList: [],
+                stats: {} };
+
+
+
+            /* istanbul ignore next */_this.sendChatMessage = /* istanbul ignore next */_this.sendChatMessage.bind( /* istanbul ignore next */_this);
+            /* istanbul ignore next */_this.unsentMessageChanged = /* istanbul ignore next */_this.unsentMessageChanged.bind( /* istanbul ignore next */_this); /* istanbul ignore next */return _this;
+        }_createClass(Chat, [{ key: 'sendChatMessage', value: function sendChatMessage()
+            {
+                //            console.debug("Sending command message on command port ", this.state.unsentMessage);
+                //            socket.emit('issueCommand', );
+
+                var cmdId = generateUUID();
+                commandPort.routeMessage({ commandId: cmdId, type: "chatCommand", message: this.state.unsentMessage });
+            } }, { key: 'unsentMessageChanged', value: function unsentMessageChanged(
+            event) {
+                this.setState({
+                    unsentMessage: event.target.value });
+
+            } }, { key: 'componentWillMount', value: function componentWillMount()
+
+            {/* istanbul ignore next */var _this2 = this;
+                var chatMessageReceived = function chatMessageReceived(messageObj) {
+                    var messageList = /* istanbul ignore next */_this2.state.messageList;
+                    messageList.push(messageObj);
+                    /* istanbul ignore next */_this2.setState({
+                        messageList: messageList });
+
+                };
+                eventRouter.on('chatMessageReceived', chatMessageReceived);
+                queryRouter.on('chatHistoryResult', function (resultMessage) {
+                    /* istanbul ignore next */_lodash2.default.each(resultMessage.events, function (event) {
+                        if (event.type === 'chatMessageReceived') {
+                            chatMessageReceived(event);
+                        }
+                    });
+                });
+                commandPort.routeMessage({ commandId: generateUUID(), type: "requestChatHistory" });
+            } }, { key: 'render', value: function render()
+            {/* istanbul ignore next */var _this3 = this;
+
+                var messages = /* istanbul ignore next */_lodash2.default.map(this.state.messageList, function (message, idx) {
+                    return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ key: idx, __source: { fileName: _jsxFileName, lineNumber: 59 }, __self: _this3 }, message.sender.userName, /* istanbul ignore next */' says ', message.message, /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 59 }, __self: _this3 })));
+                });
+
+                return (
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ className: 'Chat', __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this },
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'textarea', /* istanbul ignore next */{ value: this.state.unsentMessage, onChange: this.unsentMessageChanged, __source: { fileName: _jsxFileName, lineNumber: 65 }, __self: this }),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 66 }, __self: this }),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'button', /* istanbul ignore next */{ onClick: this.sendChatMessage, __source: { fileName: _jsxFileName, lineNumber: 67 }, __self: this }, /* istanbul ignore next */'Send message'),
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 68 }, __self: this }),
+
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 70 }, __self: this }),
+                        messages,
+                        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 72 }, __self: this })));
+
+
+            } }]);return Chat;}( /* istanbul ignore next */_react2.default.Component);
+
+    return Chat;
+};var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_lodash = require('lodash'); /* istanbul ignore next */var _lodash2 = _interopRequireDefault(_lodash);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;}

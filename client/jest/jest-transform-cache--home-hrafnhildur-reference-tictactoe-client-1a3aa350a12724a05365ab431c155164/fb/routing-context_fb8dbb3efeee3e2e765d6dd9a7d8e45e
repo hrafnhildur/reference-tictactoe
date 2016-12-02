@@ -1,0 +1,63 @@
+/* istanbul ignore next */'use strict';var inject = require('./common/framework/inject');
+var WebSocketModule = require('./io/webSocket');
+var MessageRouter = require('./common/framework/message-router');
+
+var IncomingSocketMessageDispatcherModule = require('./common/framework/incoming-socket-message-dispatcher');
+var OutgoingSocketIoMessagePortModule = require('./common/framework/outgoing-socket-io-message-port');
+
+
+function routingContext(injected) {
+
+    var eventRouter = MessageRouter();
+    var commandRouter = MessageRouter();
+    var queryRouter = MessageRouter();
+
+    var environment = injected('env');
+    var socketURI;
+    if (environment === 'development' || environment === 'test') {
+        socketURI = 'http://localhost:8080';
+    } else {
+        socketURI = '/';
+    }
+
+    var io = injected('io');
+    var socket = WebSocketModule(inject({
+        io,
+        socketURI: socketURI }));
+
+
+    var incomingSocketEventDispatcher = IncomingSocketMessageDispatcherModule(
+    inject({
+        socketIoVerb: 'eventIssued',
+        messageRouter: eventRouter }));
+
+
+    var incomingSocketQueryDispatcher = IncomingSocketMessageDispatcherModule(
+    inject({
+        socketIoVerb: 'queryResult',
+        messageRouter: queryRouter }));
+
+
+
+    var outgoingSocketIoMessagePort = OutgoingSocketIoMessagePortModule(
+    inject({
+        io: socket,
+        messageRouter: commandRouter }));
+
+
+
+    outgoingSocketIoMessagePort.dispatchThroughIo('*', 'issueCommand');
+    incomingSocketEventDispatcher.startDispatching(socket);
+    incomingSocketQueryDispatcher.startDispatching(socket);
+
+    var exports = {
+        eventRouter,
+        commandRouter,
+        queryRouter,
+        socket };
+
+    return exports;
+
+}
+
+module.exports = routingContext;

@@ -1,0 +1,17 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = function () {
+    var io = {
+        _connectedTo: undefined,
+        connect: function /* istanbul ignore next */connect(url) {
+            io._connectedTo = url;
+            return { // socket
+                on: function /* istanbul ignore next */on(eventName) {
+
+                },
+                emit: function /* istanbul ignore next */emit() {
+
+                } };
+
+        } };
+
+    return io;
+};;

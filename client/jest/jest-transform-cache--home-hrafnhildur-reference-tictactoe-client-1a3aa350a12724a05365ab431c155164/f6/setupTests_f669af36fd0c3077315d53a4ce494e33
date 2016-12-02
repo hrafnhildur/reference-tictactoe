@@ -1,0 +1,9 @@
+/* istanbul ignore next */"use strict";var /* istanbul ignore next */_inject = require("common/framework/inject"); /* istanbul ignore next */var _inject2 = _interopRequireDefault(_inject);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+window.console.debug = window.console.log;
+
+window.iit = function (testName, tf) {
+    console.log("Ignoring test <" + testName + ">");
+}; // Use to ignore tests
+
+window.inject = /* istanbul ignore next */_inject2.default;

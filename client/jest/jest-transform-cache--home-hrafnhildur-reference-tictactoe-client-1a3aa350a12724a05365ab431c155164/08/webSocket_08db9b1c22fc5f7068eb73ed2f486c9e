@@ -1,0 +1,8 @@
+/* istanbul ignore next */"use strict";module.exports = function webSocket(injected) {
+    var io = injected("io");
+    var socketURI = injected("socketURI");
+
+    var socket = io.connect(socketURI);
+    //    console.debug("Connected socket io " + socketURI);
+    return socket;
+};
