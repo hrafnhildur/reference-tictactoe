@@ -17,7 +17,7 @@ export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
 
 echo Building app
-npm build
+npm run build
 
 rc=$?
 if [[ $rc != 0 ]] ; then
@@ -52,7 +52,7 @@ cp docker-run.sh ./build/
 cd build
 echo Building docker image
 
-docker build -t hrafnhildurs/tictactoe .
+sudo docker build -t hrafnhildurs/tictactoe .
 
 rc=$?
 if [[ $rc != 0 ]] ; then
@@ -60,7 +60,7 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
-docker push hrafnhildurs/tictactoe
+sudo docker push hrafnhildurs/tictactoe
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Docker push failed " $rc
