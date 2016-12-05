@@ -25,11 +25,12 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
-
+mkdir dist
 cat > ./dist/githash.txt <<_EOF_
 $GIT_COMMIT
 _EOF_
 
+mkdir dist/public
 cat > ./dist/public/version.html << _EOF_
 <!doctype html>
 <head>
@@ -46,11 +47,12 @@ _EOF_
 
 cp ./Dockerfile ./build/
 cp ./package.json ./build/
+cp docker-run.sh ./build/
 
 cd build
 echo Building docker image
 
-docker build -t hrafnhildurs/tictactoe:$GIT_COMMIT .
+docker build -t hrafnhildurs/tictactoe .
 
 rc=$?
 if [[ $rc != 0 ]] ; then
@@ -58,7 +60,7 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
-docker push hrafnhildurs/tictactoe:$GIT_COMMIT
+docker push hrafnhildurs/tictactoe
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Docker push failed " $rc
