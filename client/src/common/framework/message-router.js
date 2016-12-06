@@ -31,7 +31,7 @@ module.exports = function (settings) {
         routeMessage: function (message) {
             var routingValue = message[routingKey];
             if (routingValue === '*') {
-                console.log("WARNING: Event router routing message that has special value * in its routing key attribute! ", message);
+                //console.log("WARNING: Event router routing message that has special value * in its routing key attribute! ", message);
             }
 
             function routeMessage(routingValue, event) {

@@ -2,6 +2,7 @@ version: '2'
 services:
   server:
     environment:
+      - 'NODE_ENV=production'
       - 'PGHOST=postgres'
       - 'PGPORT=5432'
       - 'PORT=3000'

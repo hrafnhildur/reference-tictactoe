@@ -12,10 +12,10 @@ global._require = function(moduleName){
 };
 
 global.inject = _require('framework/inject');
-
+/*
 if(process.env.NODE_ENV!=='production'){
     global.console.debug = global.console.log;
 }
-
+*/
 Path = require('path');
 
