@@ -1,7 +1,7 @@
 #!/bin/bash
-set -e
+set -e #terminate if errors
 
-sleep 10
+sleep 10 # wait 10 s
 npm run migratedb-prod
 node run.js
 
