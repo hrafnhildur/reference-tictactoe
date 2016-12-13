@@ -2,8 +2,6 @@
 // here. Only low-level libraries which do not handle IO should be available in global namespace,
 // the purpose being to decrease verbosity of code where those libraries are used.
 
-// console.log(process.env.NODE_PATH);
-
 global._ = require('lodash');
 
 // Require from common library.
@@ -13,6 +11,10 @@ global._require = function(moduleName){
 
 global.inject = _require('framework/inject');
 /*
+=======
+
+
+>>>>>>> upstream/master
 if(process.env.NODE_ENV!=='production'){
     global.console.debug = global.console.log;
 }
