@@ -40,8 +40,9 @@
     "dev": "./node_modules/.bin/parallelshell 'npm run start' 'npm run startclient'",
     "prod": "./node_modules/.bin/parallelshell 'npm run start' 'npm run startclient'",
     "migratedb": "db-migrate --config ./server/database.json --migrations-dir ./server/migrations up -e dev",
-    "migratedb-prod": "db-migrate --config ./server/database.json --migrations-dir ./server/migrations up -e production"
+    "migratedb-prod": "db-migrate --config ./server/database.json --migrations-dir ./server/migrations up -e production",
     "startdockerdb": "docker run -p 5432:5432 --name pg2 -e POSTGRES_PASSWORD=mysecretpassword -d postgres",
-    "connectdockerdb": "docker run -it --rm --link pg3:postgres postgres psql -h postgres -U postgres"
+    "connectdockerdb": "docker run -it --rm --link pg3:postgres postgres psql -h postgres -U postgres",
+    "citest": "CI=true && export NODE_PATH=./src/ && react-scripts test --env=jsdom"
   }
 }
