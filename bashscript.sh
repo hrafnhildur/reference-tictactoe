@@ -16,6 +16,10 @@ fi
 # Remove .git from url in order to get https link to repo (assumes https url for GitHub)
 export GITHUB_URL=$(echo $GIT_URL | rev | cut -c 5- | rev)
 
+npm install --silent
+cd client
+npm install --silent
+cd ..
 
 echo Building app
 npm run build 	# run build....
@@ -29,8 +33,12 @@ fi
 mkdir build # create a new build directory
 
 # put the tag on last commit in a temporary txt-file
-cat > ./build/githash.txt <<_EOF_
+cat > ./build/githash.txt << _EOF_
 $GIT_COMMIT
+_EOF_
+
+cat > ./build/.env << _EOF_ 
+GIT_COMMIT=$GIT_COMMIT
 _EOF_
 
 mkdir build/public
@@ -51,11 +59,12 @@ _EOF_
 cp ./Dockerfile ./build/
 cp ./package.json ./build/
 cp docker-run.sh ./build/
+cp docker-compose.yaml ./build/
 
 cd build
 echo Building docker image
 
-sudo docker build -t hrafnhildurs/tictactoe . # build the docker image
+sudo docker build -t hrafnhildurs/tictactoe:$GIT_COMMIT . # build the docker image
 
 rc=$?
 if [[ $rc != 0 ]] ; then
@@ -63,7 +72,7 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
-sudo docker push hrafnhildurs/tictactoe #push the image and display msg if failure
+sudo docker push hrafnhildurs/tictactoe:$GIT_COMMIT #:$GIT_COMMIT #push the image and display msg if failure
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Docker push failed " $rc
