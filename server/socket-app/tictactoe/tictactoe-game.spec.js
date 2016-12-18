@@ -163,7 +163,7 @@ describe('join game command', function () {
     });
 });
 
-/***** Unit Tests For Placing moves ************************************************/
+/**************** Unit Tests For Placing moves *********************************/
 
 describe('place a move command', function () {
     var given, when, then;
@@ -181,7 +181,43 @@ describe('place a move command', function () {
     });
 
     it('should mark grid[0,0] with X, MovePlaced', function () {
-
+        given = [{
+            type: "GameCreated",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "GameJoined",
+            user: {
+                userName: "Gummi"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        }];
+        when {
+                type: "PlaceMove",
+                user: {
+                    userName: "TheGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 0,
+                side:'X'
+            };
+        then = [
+            {
+                type: "MovePlaced",
+                user: {
+                    userName: "TheGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 0,
+                side: 'X'
+            }];
     }
     it('should mark grid[1,1] with X, MovePlaced', function () {
 
@@ -202,6 +238,6 @@ describe('place a move command', function () {
 
     }
     it('should emit gameDraw if neither wins', function () {
-        
+
     }
 }
