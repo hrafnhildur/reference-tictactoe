@@ -58,14 +58,30 @@ module.exports = function (injected) {
         }
 
         function horizontalWin(event) {
+            for (var i = 0; i < board.length; i+=3){
+                if (board[i] == playerTurn && board[i+1] == playerTurn && board[i+2] == playerTurn){
+                    return true;
+                }
+            }
             return false;
         } 
 
         function diagonalWin(event) {
+            if (board[0] == playerTurn && board[4] == playerTurn && board[8] == playerTurn){
+                return true;
+            }
+            if (board[2] == playerTurn && board[4] == playerTurn && board[6] == playerTurn){
+                return true;
+            }
             return false;
         } 
 
         function verticalWin(event) {
+            for (var i = 0; i < board.length-6; i++){
+                if (board[i] == playerTurn && board[i+3] == playerTurn && board[i+6] == playerTurn){
+                    return true;
+                }
+            }
             return false;
         }
 

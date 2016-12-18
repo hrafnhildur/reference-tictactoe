@@ -219,7 +219,7 @@ describe('place a move command', function () {
                 side: 'X'
             }];
     });
-    
+
     it('should mark grid[1,1] with X, MovePlaced', function () {
             given = [{
             type: "GameCreated",
@@ -311,7 +311,57 @@ describe('place a move command', function () {
     });
 
     it('should emit IllegalMove when square occupied', function () {
-
+        given = [
+      {
+          type: "GameCreated",
+          user: {
+              userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:29"
+      },
+      {
+          type: "GameJoined",
+          user: {
+              userName: "OtherGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:29:29",
+          side:"O"
+      },
+      {
+          type: "PlaceMove",
+          user: {
+              userName: "TheGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:30:29",
+          placeAt: "0",
+          side:"X"
+      }
+      ];
+      when =
+      {
+          type: "PlaceMove",
+          user: {
+              userName: "OtherGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:31:29",
+          placeAt: "0",
+          side:"O"
+      };
+      then = [
+      {
+          type: "IllegalMoveIsOccupied",
+          user: {
+              userName: "OtherGuy"
+          },
+          name: "TheFirstGame",
+          timeStamp: "2014-12-02T11:31:29",
+          side:"O"
+      }
+];
     });
 
     it('should emit NotYourMove if player tries 2 moves in a row', function () {

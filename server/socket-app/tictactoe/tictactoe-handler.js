@@ -56,10 +56,8 @@ module.exports = function(injected){
                        }
                         // Check here for conditions which prevent command from altering state
 
-                        //gameState.processEvents(events);
-
                         // Check here for conditions which may warrant additional events to be emitted.
-                        eventHandler([{
+                        var event([{
                             gameId: cmd.gameId,
                             type: "MovePlaced",
                             user: cmd.user,
@@ -68,6 +66,33 @@ module.exports = function(injected){
                             pos: cmd.pos,
                             side:'X'
                         }]);
+
+                        gameState.processEvents(event);
+
+
+                        if(gameState.gameWin(cmd)){
+                            event.push({
+                                gameId: cmd.gameId,
+                                type: "GameWon",
+                                user: cmd.user,
+                                name: cmd.name,
+                                timeStamp: cmd.timeStamp,
+                                side: cmd.side
+                            });
+                            return;
+                        }
+
+                        if(gameState.gameDraw(cmd)){
+                            event.push({
+                                gameId: cmd.gameId,
+                                type: "GameDraw",
+                                name: cmd.name,
+                                timeStamp: cmd.timeStamp
+                            });
+                            return;
+                        }
+
+                        eventHandler(event);
                     }
                 };
 
