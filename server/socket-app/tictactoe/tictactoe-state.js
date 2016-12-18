@@ -47,7 +47,7 @@ module.exports = function (injected) {
         }
         //Checks if all boxes are full, must be returned after gameWon
         function gameDraw(event){
-            grid[event.pos = event.side;
+            grid[event.pos] = event.side;
 
             for (var i = 0; i < grid.length; i++){
                 if (grid[i] == null){
