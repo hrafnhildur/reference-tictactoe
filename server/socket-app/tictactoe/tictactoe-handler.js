@@ -57,7 +57,7 @@ module.exports = function(injected){
                         // Check here for conditions which prevent command from altering state
 
                         // Check here for conditions which may warrant additional events to be emitted.
-                        var event([{
+                        var event = [{
                             gameId: cmd.gameId,
                             type: "MovePlaced",
                             user: cmd.user,
@@ -65,7 +65,7 @@ module.exports = function(injected){
                             timeStamp: cmd.timeStamp,
                             pos: cmd.pos,
                             side:'X'
-                        }]);
+                        }];
 
                         gameState.processEvents(event);
 
