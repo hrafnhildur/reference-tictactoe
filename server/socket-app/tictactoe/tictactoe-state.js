@@ -39,14 +39,19 @@ module.exports = function (injected) {
                 playersTurn = 'X';
             }
         }
+
+        function thisPlayersTurn(side) {
+            return(side == playersTurn);
+        }
+
         //Checks if any of possible wins are true
         function gameWin(event) {
-            if (horizontalWin(event) == true || diagonalWin(event) == true || verticalWin(event) == true) {
+            if (horizontalWin(event) || diagonalWin(event) || verticalWin(event)) {
                 return true;
             }
         }
         //Checks if all boxes are full, must be returned after gameWon
-        function gameDraw(event){
+        function gameDraw(event) {
             grid[event.pos] = event.side;
 
             for (var i = 0; i < grid.length; i++){
@@ -59,7 +64,7 @@ module.exports = function (injected) {
 
         function horizontalWin(event) {
             for (var i = 0; i < grid.length; i+=3){
-                if (grid[i] == playersTurn && grid[i+1] == playersTurn && grid[i+2] == playersTurn){
+                if (grid[i] == event.side && grid[i+1] == event.side && grid[i+2] == event.side){
                     return true;
                 }
             }
@@ -67,10 +72,10 @@ module.exports = function (injected) {
         } 
 
         function diagonalWin(event) {
-            if (grid[0] == playersTurn && grid[4] == playersTurn && grid[8] == playersTurn){
+            if (grid[0] == event.side && grid[4] == event.side && grid[8] == event.side){
                 return true;
             }
-            if (grid[2] == playersTurn && grid[4] == playersTurn && grid[6] == playersTurn){
+            if (grid[2] == event.side && grid[4] == event.side && grid[6] == event.side){
                 return true;
             }
             return false;
@@ -78,7 +83,7 @@ module.exports = function (injected) {
 
         function verticalWin(event) {
             for (var i = 0; i < grid.length-6; i++){
-                if (grid[i] == playersTurn && grid[i+3] == playersTurn && grid[i+6] == playersTurn){
+                if (grid[i] == event.side && grid[i+3] == event.side && grid[i+6] == event.side){
                     return true;
                 }
             }
@@ -92,6 +97,7 @@ module.exports = function (injected) {
             gameFull:gameFull,
             processEvents:processEvents,
             occupiedPos:occupiedPos,
+            thisPlayersTurn:thisPlayersTurn,
             gameWin:gameWin,
             gameDraw:gameDraw
         }

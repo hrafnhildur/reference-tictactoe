@@ -54,6 +54,18 @@ module.exports = function(injected){
                             }]);
                             return;
                        }
+
+                       if(gameState.thisPlayersTurn(cmd.side) == false){
+                            eventHandler( [{
+                                gameId: cmd.gameId,
+                                type: "OutOfTurnMoveAttempted",
+                                user: cmd.user,
+                                name: cmd.name,
+                                timeStamp: cmd.timeStamp,
+                                side: cmd.side
+                            }]);
+                            return;
+                        }
                         // Check here for conditions which prevent command from altering state
 
                         // Check here for conditions which may warrant additional events to be emitted.
@@ -64,9 +76,8 @@ module.exports = function(injected){
                             name: cmd.name,
                             timeStamp: cmd.timeStamp,
                             pos: cmd.pos,
-                            side:'X'
+                            side: cmd.side
                         }];
-
                         gameState.processEvents(event);
 
 
@@ -82,7 +93,7 @@ module.exports = function(injected){
                             return;
                         }
 
-                        if(gameState.gameDraw(cmd)){
+                        else if(gameState.gameDraw(cmd)){
                             event.push({
                                 gameId: cmd.gameId,
                                 type: "GameDraw",
