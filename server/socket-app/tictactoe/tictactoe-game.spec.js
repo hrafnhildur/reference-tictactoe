@@ -218,17 +218,154 @@ describe('place a move command', function () {
                 pos: 0,
                 side: 'X'
             }];
-    }
+    });
+    
     it('should mark grid[1,1] with X, MovePlaced', function () {
+            given = [{
+            type: "GameCreated",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "GameJoined",
+            user: {
+                userName: "Gummi"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        }];
+        when {
+                type: "PlaceMove",
+                user: {
+                    userName: "TheGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 4,
+                side:'X'
+            };
+        then = [
+            {
+                type: "MovePlaced",
+                user: {
+                    userName: "TheGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 4,
+                side: 'X'
+            }];
+    });
 
-    }
     it('should mark grid[2,2] with O, MovePlaced', function () {
+            given = [{
+            type: "GameCreated",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "GameJoined",
+            user: {
+                userName: "Gummi"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "MovePlaced",
+                user: {
+                    userName: "TheGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 0,
+                side:'X'
+        }];
+        when {
+                type: "PlaceMove",
+                user: {
+                    userName: "OtherGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 9,
+                side:'O'
+            };
+        then = [
+            {
+                type: "MovePlaced",
+                user: {
+                    userName: "OtherGuy"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29",
+                pos: 9,
+                side: 'O'
+            }];
+    });
 
-    }
     it('should emit IllegalMove when square occupied', function () {
 
-    }
+    });
+
     it('should emit NotYourMove if player tries 2 moves in a row', function () {
+        given = [
+        {
+            type: "GameCreated",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+        },
+        {
+            type: "GameJoined",
+            user: {
+                userName: "OtherGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29",
+            side:"O"
+        },
+        {
+            type: "PlaceMove",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:30:29",
+            placeAt: "0",
+            side:"X"
+        }
+        ];
+        when =
+        {
+            type: "PlaceMove",
+            user: {
+                userName: "OtherGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:31:29",
+            placeAt: "4",
+            side:"X"
+        };
+        then = [
+        {
+            type: "OutOfTurnMoveAttempted",
+            user: {
+                userName: "OtherGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:31:29",
+            side:"X"
+        }];
+    });
 
     }
     it('should emit gameWon on ***', function () {
