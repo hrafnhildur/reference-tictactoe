@@ -4,13 +4,13 @@ module.exports = function (injected) {
 
     return function (history) {
 
-        var fullGame = false; //in beginning game not full
+        var gameFull = false; //in beginning game not full
         var grid = new Array(9); //Gameboard exists as 3x3 array
         var playersTurn = 'X';
 
         function processEvent(event) {
             if(event.type == "GameJoined") { //if one joins game, change stateto fullGame
-                fullGame = true;
+                gameFull = true;
             }
 
             if(event.type == "MovePlaced") {
@@ -23,8 +23,8 @@ module.exports = function (injected) {
              _.each(history, processEvent);
         }
  
-         function fullGame() {
-            return fullGame;
+         function gameFull() {
+            return gameFull;
         }
 
         function occupiedPos(pos) {
@@ -73,7 +73,7 @@ module.exports = function (injected) {
         processEvents(history);
 
         return {
-            fullGame:fullGame,
+            gameFull:gameFull,
             processEvents:processEvents,
             occupiedPos:occupiedPos,
             gameWon:gameWon,
