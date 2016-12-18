@@ -40,7 +40,7 @@ module.exports = function (injected) {
             }
         }
         //Checks if any of possible wins are true
-        function gameWon(event) {
+        function gameWin(event) {
             if (horizontalWin(event) == true || diagonalWin(event) == true || verticalWin(event) == true) {
                 return true;
             }
@@ -58,8 +58,8 @@ module.exports = function (injected) {
         }
 
         function horizontalWin(event) {
-            for (var i = 0; i < board.length; i+=3){
-                if (board[i] == playerTurn && board[i+1] == playerTurn && board[i+2] == playerTurn){
+            for (var i = 0; i < grid.length; i+=3){
+                if (grid[i] == playersTurn && grid[i+1] == playersTurn && grid[i+2] == playersTurn){
                     return true;
                 }
             }
@@ -67,18 +67,18 @@ module.exports = function (injected) {
         } 
 
         function diagonalWin(event) {
-            if (board[0] == playerTurn && board[4] == playerTurn && board[8] == playerTurn){
+            if (grid[0] == playersTurn && grid[4] == playersTurn && grid[8] == playersTurn){
                 return true;
             }
-            if (board[2] == playerTurn && board[4] == playerTurn && board[6] == playerTurn){
+            if (grid[2] == playersTurn && grid[4] == playersTurn && grid[6] == playersTurn){
                 return true;
             }
             return false;
         } 
 
         function verticalWin(event) {
-            for (var i = 0; i < board.length-6; i++){
-                if (board[i] == playerTurn && board[i+3] == playerTurn && board[i+6] == playerTurn){
+            for (var i = 0; i < grid.length-6; i++){
+                if (grid[i] == playersTurn && grid[i+3] == playersTurn && grid[i+6] == playersTurn){
                     return true;
                 }
             }
@@ -92,7 +92,7 @@ module.exports = function (injected) {
             gameFull:gameFull,
             processEvents:processEvents,
             occupiedPos:occupiedPos,
-            gameWon:gameWon,
+            gameWin:gameWin,
             gameDraw:gameDraw
         }
     };

@@ -142,20 +142,21 @@ describe('join game command', function () {
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
         }];
-        when {
+        when = 
+            {
                 type: "JoinGame",
                 user: {
                     userName: "Kalli"
                 },
                 name: "TheFirstGame",
-                timeStamp: "2014-12-02T11:29:29",
+                timeStamp: "2014-12-02T11:30:29",
                 side:'O'
             };
         then = [
             {
                 type: "FullGameJoinAttempted",
                 user: {
-                    userName: "Palli"
+                    userName: "Kalli"
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:30:29"
@@ -197,7 +198,8 @@ describe('place a move command', function () {
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
         }];
-        when {
+        when = 
+            {
                 type: "PlaceMove",
                 user: {
                     userName: "TheGuy"
@@ -237,7 +239,8 @@ describe('place a move command', function () {
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
         }];
-        when {
+        when = 
+            {
                 type: "PlaceMove",
                 user: {
                     userName: "TheGuy"
@@ -287,7 +290,8 @@ describe('place a move command', function () {
                 pos: 0,
                 side:'X'
         }];
-        when {
+        when = 
+            {
                 type: "PlaceMove",
                 user: {
                     userName: "OtherGuy"
@@ -417,14 +421,13 @@ describe('place a move command', function () {
         }];
     });
 
-    }
     it('should emit gameWon on ***', function () {
 
-    }
+    });
     it('should NOT emit gameDraw if last move was win', function () {
 
-    }
+    });
     it('should emit gameDraw if neither wins', function () {
 
-    }
-}
+    });
+});
